@@ -3,26 +3,26 @@ import heapq
 
 def dijkstra(l_adj, start):
     # Dizionario delle distanze con valori iniziali a +infinito
-    distanze = {nodo: float('inf') for nodo in l_adj}
-    distanze[start] = 0
+    dists = {nodo: float('inf') for nodo in l_adj}
+    dists[start] = 0
 
     # Coda di priorità per gestire i nodi da visitare
-    coda = [(0, start)]  # (distanza, nodo)
+    q = [(0, start)]  # (distanza, nodo)
 
-    while coda:
-        distanza_corrente, nodo_corrente = heapq.heappop(coda)
+    while q:
+        current_dist, current_node = heapq.heappop(q)
 
         # Esplora i vicini
-        for vicino, peso in l_adj[nodo_corrente]:
-            distanza = distanza_corrente + peso
+        for neighbour, weight in l_adj[current_node]:
+            dist = current_dist + weight
 
             # Se la nuova distanza è minore o il nodo non è stato visitato, aggiorna e aggiungi alla coda
-            if distanza < distanze[vicino]:
-                distanze[vicino] = distanza
-                heapq.heappush(coda, (distanza, vicino))
+            if dist < dists[neighbour]:
+                dists[neighbour] = dist
+                heapq.heappush(q, (dist, neighbour))
 
     # Debug: stampo il dizionario prima di restituirlo
-    return distanze
+    return dists
 
 
 
