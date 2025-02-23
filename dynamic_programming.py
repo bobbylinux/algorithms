@@ -22,6 +22,6 @@ def memFibonacci(n, f):
 
 if __name__ == '__main__':
     # print(n_sum(1))
-    # print(fibonacci(5))
-    n = 5
+    n = 10
+    print(fibonacci(n))
     print(memFibonacci(n, [0] * n))

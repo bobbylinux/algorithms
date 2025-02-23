@@ -1,6 +1,6 @@
 import heapq
 
-
+# questa versione fa uso di heap, ed è la migliore scelta per grafi sparsi (complessità O[(n*m)*log(n)]
 def dijkstra(l_adj, start):
     # Dizionario delle distanze con valori iniziali a +infinito
     dists = {nodo: float('inf') for nodo in l_adj}
