@@ -39,7 +39,8 @@ def dijkstra_monti(adj, start):
             if distances[a] < m:
                 m = distances[a]
                 node = a
-        nodes.pop(node)
+        index = nodes.index(node)
+        nodes.pop(index)
         for n, d in adj[node]:
             if distances[node] + d < distances[n]:
                 fathers[n] = node
