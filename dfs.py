@@ -60,12 +60,27 @@ def dfs_cycle_nd(start, adj):
                 continue
             if visited[item]:
                 return True
-            elif dfs_cycle_ndr(item, node, l_adj, visited):
+            if dfs_cycle_ndr(item, node, l_adj, visited):
                 return True
         return False
 
     v = [False for _ in range(len(adj))]
     return dfs_cycle_ndr(start, start, adj, v)
+
+
+def dfs_cycle_dr(adj):
+    def dfs_r(l, s, v):
+        v[s] = 1
+        for x in l[s]:
+            if v[x] == 1:
+                return True
+            if v[x] == 0:
+                if dfs_r(l, x, v): return True
+        v[s] = 2
+        return False
+
+    visited = [0] * len(adj)
+    return dfs_r(adj, 0, visited)
 
 
 def comp_conn(lad):
