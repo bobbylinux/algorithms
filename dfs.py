@@ -36,21 +36,21 @@ def dfsl(u, l):
     dfsr(u, l, visitati)
     return visitati
 
+def dfs_cycle_dag(adj, start):
 
-def dfslp(radice, lista_adiacenza):
-    def dfsr(vertice, lista_adiacenza, visitati, padri):
-        visitati[vertice] = True
-        for adiacente in l[vertice]:
-            if not visitati[adiacente]:
-                padri[adiacente] = vertice
-                dfsr(adiacente, lista_adiacenza, visitati, padri)
+    def dfs_r(l, s, v):
+        v[s] = 1 # nodo in esplorazione
+        for x in l[s]:
+            if v[x] == 0:
+                if dfs_r(l, x, v):
+                    return True # c'è un ciclo nel i sotto grafi
+            if v[x] == 1:
+                return True
+        v[s] = 2 #nodo completato
+        return False
 
-    visitati = [False] * len(l)
-    padri = [-1] * len(l)
-    padri[radice] = radice
-    dfsr(radice, lista_adiacenza, visitati, padri)
-    return visitati, padri
-
+    visited = [0]*len(adj)
+    return dfs_r(adj, start, visited)
 
 def dfs_cycle_nd(start, adj):
     def dfs_cycle_ndr(node, father, l_adj, visited):
