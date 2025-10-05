@@ -36,6 +36,7 @@ def dfsl(u, l):
     dfsr(u, l, visitati)
     return visitati
 
+
 def dfs_cycle_dag(adj, start):
 
     def dfs_r(l, s, v):
