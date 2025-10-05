@@ -24,15 +24,15 @@ def subsets_rec(n, current, i):
     if i > n:
         # condizione di stop: ho considerato tutti gli elementi
         print(current)
-    else:
-        # caso 1: NON includo i
-        subsets_rec(n, current, i+1)
+        return 
+    # caso 1: NON includo i
+    subsets_rec(n, current, i+1)
 
-        # caso 2: includo i
-        subsets_rec(n, current + [i], i+1)
+    # caso 2: includo i
+    subsets_rec(n, current + [i], i+1)
 
 
 if __name__ == '__main__':
     # permutation_naif([1,2,3],[])
-    permutation_swap([1,2,3],0)
-    # subsets_rec(3, [], 1)
+    #permutation_swap([1,2,3],0)
+    subsets_rec(3, [], 1)
