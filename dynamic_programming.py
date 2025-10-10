@@ -20,6 +20,13 @@ def memFibonacci(n, f):
     return f[n - 1]
 
 
+def fibonacci_memoization(n, F):
+    if n <= 1: return 1
+    if F[n] == 0:
+        F[n] = fibonacci_memoization(n - 1, F) + fibonacci_memoization(n - 2, F)
+    return F[n]
+
+
 def iterFibonacci(n):
     f = [0] * (n + 1)
     f[0] = 1
@@ -53,30 +60,13 @@ def file(s, k, cap):
             maxim = m
     return maxim
 
-def hateville(donations):
-    result = [0, donations[0]]
-    for i in range(1,len(donations)):
-        result.append(max(result[-1], result[-2] + donations[i]))
-    return result[-1]
-
-def ex01(points):
-    result = 0
-    n = len(points)
-    if len(points) == 0: return 0
-    if n == 1: result = points[n - 1]
-    if n == 2: result = max(points[n - 1], points[n - 2])
-    for x in range(2, n):
-        result += max(points[x - 1], points[x - 2])
-    return result
-
 
 if __name__ == '__main__':
     # print(n_sum(1))
-    #s = [1024, 100, 101, 2048, 1984, 55, 1, 18]
-    #file(s, len(s), 5120)
+    s = [1024, 100, 101, 2048, 1984, 55, 1, 18]
+    file(s, len(s), 5120)
     # n = 5
     # print(fibonacci(n))
     # print(memFibonacci(n, [0] * n))
     # print(iterFibonacci(n))
     # print(fibonacci_iterativo(n))
-    print(hateville([0,10,5,5,8,4,7,12]))
