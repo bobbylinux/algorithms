@@ -20,6 +20,7 @@ def permutation_swap(numbers, i):
         permutation_swap(numbers, i+1)
         numbers[i], numbers[j] = numbers[j], numbers[i]
 
+
 def subsets_rec(n, current, i):
     if i > n:
         # condizione di stop: ho considerato tutti gli elementi
