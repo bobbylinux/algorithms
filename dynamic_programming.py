@@ -61,12 +61,26 @@ def file(s, k, cap):
     return maxim
 
 
+def knapsack(weigth, value, capacity):
+    result = [[]]
+    n = len(weigth)
+    result = [[0 for _ in range(capacity+1)] for _ in range(n+1)]
+    for i in range(1, n+1): 
+        for c in range(1, capacity+1): 
+            if weigth[i-1] <= c: 
+                result[i][c] = max(result[i-1][c], result[i-1][c-weigth[i-1]] + value[i-1])
+            else: 
+                result[i][c] = result[i-1][c]
+    return result[n][capacity]
+
+
 if __name__ == '__main__':
     # print(n_sum(1))
-    s = [1024, 100, 101, 2048, 1984, 55, 1, 18]
-    file(s, len(s), 5120)
+    # s = [1024, 100, 101, 2048, 1984, 55, 1, 18]
+    # file(s, len(s), 5120)
     # n = 5
     # print(fibonacci(n))
     # print(memFibonacci(n, [0] * n))
     # print(iterFibonacci(n))
     # print(fibonacci_iterativo(n))
+    print(knapsack([4,2,3,4], [10,7,8,6], 9))
