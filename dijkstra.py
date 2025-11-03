@@ -27,26 +27,33 @@ def dijkstra(l_adj, start):
 
 
 def dijkstra_monti(adj, start):
-    distances = [float('inf')] * len(adj)
-    fathers = [-1] * len(adj)
-    nodes = [x for x in adj]
+    n = len(adj)
+    fathers = [0] * n         # vettore dei padri
+    distances = [-1] * n      # vettore delle distanze
     fathers[start] = start
     distances[start] = 0
-    while nodes:
-        m = float('inf')
-        node = -1
-        for a in nodes:
-            if distances[a] < m:
-                m = distances[a]
-                node = a
-        index = nodes.index(node)
-        nodes.pop(index)
-        for n, d in adj[node]:
-            if distances[node] + d < distances[n]:
-                fathers[n] = node
-                distances[n] = distances[node] + d
+    while True:
+        candidates = []
+        for el in adj:  # scorre tutti i nodi
+            if fathers[el] != 0:
+                for x, w in adj[el]:
+                    if fathers[x] == 0:
+                        # attenzione: append di una tupla completa
+                        candidates.append((distances[el] + w, el, x))
+        if len(candidates) == 0:
+            break
+        # min restituisce la tupla con primo elemento minimo
+        _, el_min, v_min = min(candidates, key=lambda t: t[0])
 
-    return distances
+        fathers[v_min] = el_min
+        # troviamo il peso dell'arco (el_min, v_min)
+        w = None
+        for nodo, peso in adj[el_min]:
+            if nodo == v_min:
+                w = peso
+                break
+        distances[v_min] = distances[el_min] + w
+    return fathers, distances
 
 
 if __name__ == '__main__':

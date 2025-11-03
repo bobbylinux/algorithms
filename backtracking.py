@@ -97,6 +97,83 @@ def ex03_0724(n, i, s, pb, cb):
             ex03_0724(n, i + 1, s, pb, cb)
             s.pop(x)
 
+'''
+Data una stringa ternaria s vogliamo stampare tutte le stringhe ternarie della
+stessa lunghezza di s e che differiscono da s in tutte le posizioni.
+
+Ad esempio per s =
+
+0 1020 vanno stampate le seguenti stringhe (non necessaria-
+mente nello stesso ordine):
+
+010, 011, 020, 021, 210, 211, 220, 221
+
+Progettare un algoritmo che risolve il problema in tempo O(n · S(s)) dove n `e
+la lunghezza della stringa s ed S(s) `e il numero di stringhe da stampare.
+Motivare BENE la correttezza e la complessità dell’algoritmo proposto.
+'''
+def ex03_1024(s, i, result):
+    if i >= len(s):
+        print(result)
+        return
+    for item in {0,1,2}:
+        if item != s[i]:
+            result.append(item)
+            ex03_1024(s, i+1, result)
+            result.pop()
+
+'''
+ESERCIZIO 3 stampa risalite: data una scala con n
+
+2 gradini vogliamo
+sapere i diversi modi che abbiamo di risalita dal primo all’ultimo gradino della
+scala sapendo che ad ogni passo possiamo risalire di 1, 2 o 3 gradini. Ogni modo
+di risalire `e rappresentato dalla sequenza di passi che vengono di volta in volta
+effettuati.
+
+Ad esempio per una scala con n = 4 gradini la risposta sar`a data dalle 4 sequenze:
+
+[1, 1, 1], [1, 2], [2, 1], [3]
+
+Progettare un algoritmo basato sulla tecnica del backtracking che dato n stampa
+i diversi modi di risalire la scala.
+L’algoritmo deve avere complessità O(nS(n)) dove S(n) `e il numero di diversi
+modi di risalire la scala.
+
+Motivare BENE la correttezza e la complessit`a dell’algoritmo pro-
+posto.
+'''
+
+def ex03_1023(n, s, r):
+    if s == n:
+        print(r)
+        return
+    for el in {1,2,3}:
+        if s <= n:
+            r.append(el)
+            ex03_1023(n, s+el, r)
+            r.pop()
+        else:
+            return
+
+
+'''
+Progettare un algoritmo che, dato l'intero , stampi tutte le matrici
+binarie di dimensione tali che nella diagonale principale e in
+ciascuna delle diagonali parallele a quella principale compaiano
+elementi uguali.
+L'algoritmo deve avere complessità dove è il numero di matrici
+da stampare.
+'''
+def ex03_0125(n, i, M):
+    if i == n*n:
+        print(M)
+        return
+    for el in {0,1}:
+        if i//n == 0 or i%n == 0 or M[(i//n)-1][(i%n)-1] == el:
+            M[i//n][i%n] = el
+            ex03_0125(n, i + 1, M)
+
 
 if __name__ == '__main__':
     # permutation_naif([1,2,3],[])
@@ -106,4 +183,9 @@ if __name__ == '__main__':
     # subsets_naif(3,[], 1)
     # subsets_bitmask(4)
     # c = ex03_0925(5, [])
-    ex03_0724(4, 0, [], None, None)
+    # ex03_0724(4, 0, [], None, None)
+    # ex03_1024([1,0,2], 0, [])
+    # ex03_1023(3, 0, [])
+    n = 3
+    M = [[None for _ in range(n)] for _ in range(n)]
+    binary_matrix(n, 0, M)
