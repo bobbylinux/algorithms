@@ -165,14 +165,38 @@ elementi uguali.
 L'algoritmo deve avere complessità dove è il numero di matrici
 da stampare.
 '''
-def ex03_0125(n, i, M):
+def ex03_0325(n, i, M):
     if i == n*n:
         print(M)
         return
     for el in {0,1}:
         if i//n == 0 or i%n == 0 or M[(i//n)-1][(i%n)-1] == el:
             M[i//n][i%n] = el
-            ex03_0125(n, i + 1, M)
+            ex03_0325(n, i + 1, M)
+
+
+'''
+Dato un intero n vogliamo stampare tutte le stringhe binarie di lunghezza n in
+cui non compare la sottostringa ’101’ n ́e la sottostringa ’010’.
+Ad esempio per n = 40 delle 16 stringhe binarie lunghe 4 vanno stampate le
+seguenti 10 (non necessariamente nello stesso ordine):
+
+0000 0001 0011 0110 0111 1000 1001 1100 1110 1111
+
+Progettare un algoritmo, basato sulla tecnica del backtracking, che risolva il
+problema in tempo O(n · S(n)) dove S(n) `e il numero di stringhe da stampare.
+Motivare BENE la correttezza e la complessit`a dell’algoritmo proposto
+'''
+def ex03_0225(n, i, result):
+    if i > n:
+        print(result)
+        return
+    for el in {0,1}:
+        if i <= 1 or (el == 1 and result[-2:-1] != ['0','1']) or (el == 0 and result[-2:-1] != ['1','0']):
+            result.append(el)
+            ex03_0225(n, i+1, result)
+            result.pop()
+
 
 
 if __name__ == '__main__':
@@ -186,6 +210,7 @@ if __name__ == '__main__':
     # ex03_0724(4, 0, [], None, None)
     # ex03_1024([1,0,2], 0, [])
     # ex03_1023(3, 0, [])
-    n = 3
-    M = [[None for _ in range(n)] for _ in range(n)]
-    binary_matrix(n, 0, M)
+    # n = 3
+    # M = [[None for _ in range(n)] for _ in range(n)]
+    # ex03_0325(n, 0, M)
+    ex03_0225(3, 0,[])
