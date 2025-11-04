@@ -16,9 +16,9 @@ def permutation_swap(numbers, i):
         return
 
     for j in range(i):
-        numbers[i - 1], numbers[j] = numbers[j], numbers[i - 1]
+        numbers[i-1], numbers[j] = numbers[j], numbers[i-1]
         permutation_swap(numbers, i - 1)
-        numbers[i - 1], numbers[j] = numbers[j], numbers[i - 1]
+        numbers[i-1], numbers[j] = numbers[j], numbers[i-1]
 
 
 def subsets_rec(n, current, i):
@@ -55,9 +55,20 @@ def subsets_bitmask(n):
     for j in range(2 ** (n - 1)):
         print("{", end=" ")
         for i in range(n - 1):
-            if j & 2 ** i != 0:
                 print(i, ",", end=" ")
         print("}")
+
+def binaries_sequences(n, current, i):
+    if i == n:
+        print(current)
+        return
+    current.append('0')
+    binaries_sequences(n, current, i+1)
+    current.pop()
+    current.append('1')
+    binaries_sequences(n, current, i + 1)
+    current.pop()
+
 
 
 def ex03_0925(n, s):
@@ -202,6 +213,7 @@ def ex03_0225(n, i, result):
 if __name__ == '__main__':
     # permutation_naif([1,2,3],[])
     # permutation_swap(['A', 'B', 'C'], 3)
+    # permutation_swap([1,2,3],3)
     # subsets_rec(3, [], 1)
     # subsets_k_of_n(6, 3,[], 1)
     # subsets_naif(3,[], 1)
@@ -214,3 +226,4 @@ if __name__ == '__main__':
     # M = [[None for _ in range(n)] for _ in range(n)]
     # ex03_0325(n, 0, M)
     ex03_0225(3, 0,[])
+    binaries_sequences(3, [], 0)
