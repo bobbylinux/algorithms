@@ -1,3 +1,6 @@
+from merge_sort import merge_sort
+
+
 def permutation_naif(numbers, partials):
     if len(numbers) == len(partials):
         print(partials)
@@ -210,6 +213,28 @@ def ex03_0225(n, i, result):
 
 
 
+def subset_back_sort(l):
+    distinct_list = []
+    for el in l:
+        found = False
+        for x in distinct_list:
+            if x == el:
+                found = True
+        if not found:
+            distinct_list.append(el)
+
+    distinct_list= merge_sort(distinct_list)
+
+    def backtrack(l, c, i = 0):
+        if i == len(l):
+            print(c)
+            return
+        backtrack(l, c, i+1)
+        backtrack(l, c + [l[i]], i+1)
+
+    backtrack(distinct_list,[], 0)
+
+
 if __name__ == '__main__':
     # permutation_naif([1,2,3],[])
     # permutation_swap(['A', 'B', 'C'], 3)
@@ -225,5 +250,6 @@ if __name__ == '__main__':
     # n = 3
     # M = [[None for _ in range(n)] for _ in range(n)]
     # ex03_0325(n, 0, M)
-    ex03_0225(3, 0,[])
-    binaries_sequences(3, [], 0)
+    # ex03_0225(3, 0,[])
+    # binaries_sequences(3, [], 0)
+    subset_back_sort([5,1,2])

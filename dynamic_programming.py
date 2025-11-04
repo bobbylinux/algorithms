@@ -102,13 +102,33 @@ def knapsack(weigth, value, capacity):
                 result[i][c] = result[i-1][c]
     return result[n][capacity]
 
+def longest_common_subsequence(A, B):
+    n_a = len(A)
+    n_b = len(B)
+    T = []
+    for _ in range(n_a + 1):
+        T.append([None for _ in range(n_b+1)])
+    for i in range(n_b + 1):
+        T[0][i] = 0
+    for i in range(n_a + 1):
+        T[i][0] = 0
+    for i in range(1,n_a+1):
+        for j in range(1,n_b+1):
+            if A[i-1] == B[j-1]:
+                T[i][j] = T[i-1][j-1] + 1
+            else:
+                T[i][j] = max(T[i-1][j], T[i][j-1])
+    return T[n_a][n_b]
+
+
 
 if __name__ == '__main__':
     # print(n_sum(1))
-    s = [1024, 100, 101, 2048, 1984, 55, 1, 18]
-    file(s, len(s), 5120)
+    # s = [1024, 100, 101, 2048, 1984, 55, 1, 18]
+    # file(s, len(s), 5120)
     # n = 5
     # print(fibonacci(n))
     # print(memFibonacci(n, [0] * n))
     # print(iterFibonacci(n))
     # print(fibonacci_iterativo(n))
+    print(longest_common_subsequence(['T','A','T'], ['A','T','A','T']))
